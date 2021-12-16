@@ -53,7 +53,7 @@ add_library(alignit_lib SHARED src/siMath.cpp src/coordinate.cpp src/pharmacopho
     src/pharMerger.cpp src/hybridCalc.cpp src/alignment.cpp src/functionMapping.cpp
     src/result.cpp src/addBest.cpp src/compScore.cpp src/addBest.cpp
     src/aromFuncCalc.cpp src/hAccFuncCalc.cpp src/hDonFuncCalc.cpp src/lipoFuncCalc.cpp
-    src/calcPharm.cpp src/alignLib.cpp
+    src/calcPharm.cpp src/alignLib.cpp src/mainWar.cpp
 )
 target_include_directories(alignit_lib PUBLIC ${OPENBABEL3_INCLUDE_DIR} ${RDKIT_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
 target_link_libraries(alignit_lib ${OPENBABEL3_LIBRARIES} ${RDKIT_LIBRARIES} ${RDKit_THREAD_LIBS})
