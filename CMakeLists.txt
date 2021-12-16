@@ -59,7 +59,6 @@ target_include_directories(alignit_lib PUBLIC ${OPENBABEL3_INCLUDE_DIR} ${RDKIT_
 target_link_libraries(alignit_lib ${OPENBABEL3_LIBRARIES} ${RDKIT_LIBRARIES} ${RDKit_THREAD_LIBS})
 install(TARGETS alignit_lib DESTINATION lib)
 
-# move some of printy stuff to the executable
 add_executable(${PROJECT_NAME} src/options.cpp src/main.cpp src/mainErr.cpp src/printHeader.cpp
     src/printInfo.cpp src/printUsage.cpp src/printProgress.cpp src/parseCommandLine.cpp
     src/logOut.cpp src/logScores.cpp src/logPharmacophores.cpp src/getExt.cpp
@@ -68,9 +67,6 @@ target_link_libraries(${PROJECT_NAME} alignit_lib ${OPENBABEL3_LIBRARIES} ${RDKI
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 message("Installation directory of executable: ${CMAKE_INSTALL_PREFIX}/bin")
 
-# Add some basic tests with catch
-
-# Build Python support
 if(BUILD_PYTHON_SUPPORT)
     add_subdirectory(src/Wrap)
 endif(BUILD_PYTHON_SUPPORT)
