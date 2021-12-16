@@ -281,6 +281,9 @@ int main(int argc, char* argv[]){
         if (dbPharm.empty()) {
             continue;
         }
+        if (dbId == "") {
+            dbId = "Unnamed_ref";
+        }
 
         ++molCount;
         if (!uo.isQuiet ) {
