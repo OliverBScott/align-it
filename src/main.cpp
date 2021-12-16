@@ -257,18 +257,18 @@ int main(int argc, char* argv[]){
                 dbId = m.GetTitle();
             }
 #else
-        if (molReader->atEnd()) {
-                done = true;
-                break;
-            } else {
-            std::unique_ptr<RDKit::ROMol> dbmptr(molReader->next());
-            if (!dbmptr) {
-                continue;
+            if (molReader->atEnd()) {
+                    done = true;
+                    break;
+                } else {
+                std::unique_ptr<RDKit::ROMol> dbmptr(molReader->next());
+                if (!dbmptr) {
+                    continue;
+                }
+                m = *dbmptr;
+                calcPharm(&m, &dbPharm, uo);
+                m.getPropIfPresent("_Name", dbId);
             }
-            m = *dbmptr;
-            calcPharm(&m, &dbPharm, uo);
-            m.getPropIfPresent("_Name", dbId);
-        }
 #endif
         } else {
             if (uo.dbInpStream->eof()) {

@@ -266,7 +266,7 @@ Options parseCommandLine(int argc, char *argv[]) {
 				delete reader;
             }
 #else
-            if (o.refInpType != "phar" || o.refInpType != "sdf") {
+            if (o.refInpType != "phar" && o.refInpType != "sdf") {
                 mainErr("RDKit implementation currently only supports SDF or PHAR (refInpType)");
             }
 #endif
@@ -282,7 +282,7 @@ Options parseCommandLine(int argc, char *argv[]) {
 			delete reader;
 #else
             std::string extension = getExt(o.refInpFile);
-            if (extension != "sdf") {
+            if (extension != "sdf" && extension != "phar") {
                 mainErr("RDKit implementation currently only supports SDF or PHAR (refInpFile)");
             }
             o.refInpType = "sdf";
@@ -311,8 +311,8 @@ Options parseCommandLine(int argc, char *argv[]) {
 				delete reader;
             }
 #else
-            if ((o.dbInpType != "phar") || (o.dbInpType != "sdf")) {
-                mainErr("RDKit implementation currently only supports SDF or PHAR (refInpType)");
+            if (o.dbInpType != "phar" && o.dbInpType != "sdf") {
+                mainErr("RDKit implementation currently only supports SDF or PHAR (dbInpType)");
             }
 #endif
         } else {
@@ -327,7 +327,7 @@ Options parseCommandLine(int argc, char *argv[]) {
 			delete reader;
 #else
             std::string extension = getExt(o.dbInpFile);
-            if (extension != "sdf") {
+            if (extension != "sdf" && extension != "phar") {
                 mainErr("RDKit implementation currently only supports SDF or PHAR (dbInpFile)");
             }
             o.dbInpType = "sdf";
