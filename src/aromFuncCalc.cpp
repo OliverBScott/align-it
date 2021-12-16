@@ -74,8 +74,6 @@ void aromFuncCalc(OpenBabel::OBMol* mol, Pharmacophore* pharmacophore) {
 #include <GraphMol/MolOps.h>
 #include <Geometry/point.h>
 
-#ifndef USE_RDKIT
-
 void aromFuncCalc(RDKit::ROMol *mol, Pharmacophore *pharmacophore) {
     // Create for every aromatic ring a pharmacophore point
     bool rings(false);
