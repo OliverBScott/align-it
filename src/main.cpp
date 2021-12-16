@@ -276,9 +276,11 @@ int main(int argc, char* argv[]){
                 break;
             } else {
                 dbPharm = pharmReader->read(uo.dbInpStream, dbId);
+#ifdef USE_RDKIT
                 auto conf = RDKit::Conformer(m.getNumAtoms());
                 conf.set3D(true);
                 m.addConformer(&conf);
+#endif
             }
         }
         if (dbPharm.empty()) {

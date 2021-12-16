@@ -369,11 +369,15 @@ Options parseCommandLine(int argc, char *argv[]) {
 			}
 			delete reader;
 #else
-            std::string extension = getExt(o.molOutFile);
-            if (extension != "sdf") {
-                mainErr("RDKit implementation currently only supports SDF (molOutFile)");
+            if (!o.molOutFile.empty()) {
+                std::string extension = getExt(o.molOutFile);
+                if (extension != "sdf") {
+                    mainErr("RDKit implementation currently only supports SDF (molOutFile)");
+                }
+                o.molOutType = "sdf";
+            } else {
+                o.molOutType.clear();
             }
-            o.molOutType = "sdf";
 #endif
         }
 #ifndef USE_RDKIT
@@ -385,8 +389,9 @@ Options parseCommandLine(int argc, char *argv[]) {
             o.molOutWriter->SetOutFormat(o.molOutWriter->FormatFromExt(o.molOutFile));
         }
 #else
-        // not sure here
-        o.molOutWriter = new RDKit::SDWriter(o.molOutStream, false);
+        if (!o.molOutFile.empty() && !o.molOutType.empty()) {
+            o.molOutWriter = new RDKit::SDWriter(o.molOutStream, false);
+        }
 #endif
     }
     argc -= optind;
