@@ -9,6 +9,8 @@ import warnings
 from .cpyalignit import *
 from .draw import PHARM_COLORS, draw_pharmacophore
 
+__version__ = GetVersion()
+
 
 class PharmacophoreSupplier(object):
 

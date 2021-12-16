@@ -31,21 +31,33 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 #include "alignLib.h"
+#include "config.h"
 
 namespace python = boost::python;
 
 namespace {
 
-} //
+std::string getVersion() {
+    std::string version = "";
+    version += std::to_string(ALIGNIT_VERSION);
+    version += "." + std::to_string(ALIGNIT_RELEASE);
+    version += "." + std::to_string(ALIGNIT_SUBRELEASE);
+    return version;
+}
+
+} // namespace
 
 void wrap_pyalignit() {
-    // Coordinate
+    // Align-it version
+    python::def("GetVersion", &getVersion);
+
+    // Coordinate (the classic xyz)
     python::class_<Coordinate>("Coordinate")
         .def_readwrite("x", &Coordinate::x)
         .def_readwrite("y", &Coordinate::y)
         .def_readwrite("z", &Coordinate::z);
 
-    // FuncGroups
+    // FuncGroups (enum of possible functional groups)
     python::enum_<FuncGroup>("FuncGroup")
         .value("AROM", FuncGroup::AROM)
         .value("HDON", FuncGroup::HDON)
@@ -58,7 +70,7 @@ void wrap_pyalignit() {
         .value("EXCL", FuncGroup::EXCL)
         .value("UNDEF", FuncGroup::UNDEF);
 
-    // PharmacophorePoint
+    // PharmacophorePoint (represents a functional group)
     python::class_<PharmacophorePoint>("PharmacophorePoint")
         .add_property("point", &PharmacophorePoint::point)
         .add_property("normal", &PharmacophorePoint::normal)
@@ -66,11 +78,11 @@ void wrap_pyalignit() {
         .def_readwrite("alpha", &PharmacophorePoint::alpha)
         .def_readwrite("hasNormal", &PharmacophorePoint::hasNormal);
 
-    // Pharmacophore
+    // Pharmacophore (pharmacophore model i.e. a vector of pharmacophore points)
     python::class_<Pharmacophore>("Pharmacophore")
         .def(python::vector_indexing_suite<std::vector<PharmacophorePoint>>());
 
-    // CalcPharm
+    // CalcPharm (calculate pharmacophores)
     python::def("CalcPharmacophore", &alignit::calcPharmacophore, (
             python::arg("mol"),
             python::arg("calcArom") = true,
@@ -82,7 +94,7 @@ void wrap_pyalignit() {
             "calculate a pharmacophore model for a molecule."
     );
 
-    // PharmMerger
+    // PharmMerger (merge neighboring pharmacophores)
     python::def("MergePharmacophore", &alignit::mergePharmacophore,
             (python::arg("pharmacophore")),
             "merge neighbouring pharmacophore points of the same category"
