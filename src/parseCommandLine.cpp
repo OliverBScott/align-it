@@ -285,7 +285,7 @@ Options parseCommandLine(int argc, char *argv[]) {
             if (extension != "sdf" && extension != "phar") {
                 mainErr("RDKit implementation currently only supports SDF or PHAR (refInpFile)");
             }
-            o.refInpType = "sdf";
+            o.refInpType = extension;
 #endif
         }
         // DATABASE
@@ -330,7 +330,7 @@ Options parseCommandLine(int argc, char *argv[]) {
             if (extension != "sdf" && extension != "phar") {
                 mainErr("RDKit implementation currently only supports SDF or PHAR (dbInpFile)");
             }
-            o.dbInpType = "sdf";
+            o.dbInpType = extension;
 #endif
         }
         // MOL OUTPUT
