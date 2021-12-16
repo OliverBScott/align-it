@@ -32,13 +32,6 @@ Align-it can be linked against OpenBabel version 3 or the RDKit.
 #include <openbabel/atom.h>
 #include <openbabel/data.h>
 #include <openbabel/ring.h>
-#else
-#include <GraphMol/ROMol.h>
-#include <GraphMol/MolOps.h>
-#include <Geometry/point.h>
-#endif
-
-#ifndef USE_RDKIT
 
 void aromFuncCalc(OpenBabel::OBMol* mol, Pharmacophore* pharmacophore) {
 	// Create for every aromatic ring a pharmacophore point
@@ -77,6 +70,11 @@ void aromFuncCalc(OpenBabel::OBMol* mol, Pharmacophore* pharmacophore) {
 }
 
 #else
+#include <GraphMol/ROMol.h>
+#include <GraphMol/MolOps.h>
+#include <Geometry/point.h>
+
+#ifndef USE_RDKIT
 
 void aromFuncCalc(RDKit::ROMol *mol, Pharmacophore *pharmacophore) {
     // Create for every aromatic ring a pharmacophore point
