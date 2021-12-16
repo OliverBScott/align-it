@@ -40,6 +40,7 @@ Align-it can be linked against OpenBabel version 3 or the RDKit.
 
 // Align-it
 #include <coordinate.h>
+#include <mainWar.h>
 #include <siMath.h>
 
 enum FuncGroup {

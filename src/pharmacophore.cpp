@@ -64,9 +64,7 @@ Pharmacophore PharmacophoreReader::read(std::ifstream *_input, std::string &name
     Pharmacophore pharmacophore;
     pharmacophore.clear();
     if (!*_input) {
-        // todo
-        // do a warning
-        // maybe able to throw error on python side // return None?
+        mainWar("Unable to read pharmacophore. Input stream not accessible.");
         return pharmacophore;
     }
     std::string line;
@@ -87,8 +85,7 @@ Pharmacophore PharmacophoreReader::read(std::ifstream *_input, std::string &name
         if (lineVec.size() < 8) {
             _skipPharmacophore(_input);
             if (!_input->eof()) {
-                // todo
-                // warning here also incorrect line format
+                mainWar("Incorrect line: " + line);
                 pharmacophore.clear();
                 return pharmacophore;
             } else {
@@ -107,8 +104,7 @@ Pharmacophore PharmacophoreReader::read(std::ifstream *_input, std::string &name
         if (lineVec[0] == "EXCL") { isOk = true; p.func = EXCL; }
         if (!isOk) {
             _skipPharmacophore(_input);
-            // todo
-            // raise a warning incorrect functional group
+            mainWar("Incorrect functional group:: " + line);
             pharmacophore.clear();
             return pharmacophore;
         }
