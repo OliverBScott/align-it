@@ -29,6 +29,9 @@ Align-it can be linked against OpenBabel version 3 or the RDKit.
 #ifndef __SILICOSIT_ALIGNIT_ALIGNLIB_H__
 #define __SILICOSIT_ALIGNIT_ALIGNLIB_H__
 
+// General
+#include <tuple>
+
 // Align-it
 #include <pharmacophore.h>
 #include <pharMerger.h>
@@ -51,8 +54,6 @@ using Molecule = RDKit::ROMol;
 
 namespace alignit {
 
-// Read + write utilities for pharmacophores
-
 Pharmacophore calcPharmacophore(
     Molecule &mol,
     bool calcArom = true,
@@ -65,8 +66,29 @@ Pharmacophore calcPharmacophore(
 
 void mergePharmacophore(Pharmacophore &p);
 
-// not sure how to align in the best way
-// pharmacophores + mols
+Result alignPharmacophores(
+    Pharmacophore &ref,
+    Pharmacophore &db,
+    double epsilon,
+    bool useNormals,
+    bool useExclusion,
+    Molecule *dbMol
+);
+
+std::tuple<Pharmacophore, Result> alignMols(
+    Molecule &refMol,
+    Molecule &refDb,
+    bool calcArom = true,
+    bool calcHDon = true,
+    bool calcHAcc = true,
+    bool calcLipo = true,
+    bool calcCharge = true,
+    bool calcHybrid = true,
+    bool merge = false,
+    double epsilon = 0.5,
+    bool useNormals = true,
+    bool useExclusion = false
+);
 
 } // namespace alignit
 

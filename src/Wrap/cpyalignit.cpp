@@ -23,26 +23,71 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ***********************************************************************/
 
-#include <iostream>
-#include <fstream>
-
 #include <boost/python.hpp>
-#include <boost/python/stl_iterator.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 #include "alignLib.h"
 #include "config.h"
 
 namespace python = boost::python;
+using namespace RDKit;
 
 namespace {
 
 std::string getVersion() {
-    std::string version = "";
-    version += std::to_string(ALIGNIT_VERSION);
-    version += "." + std::to_string(ALIGNIT_RELEASE);
-    version += "." + std::to_string(ALIGNIT_SUBRELEASE);
-    return version;
+  std::string version = "";
+  version += std::to_string(ALIGNIT_VERSION);
+  version += "." + std::to_string(ALIGNIT_RELEASE);
+  version += "." + std::to_string(ALIGNIT_SUBRELEASE);
+  return version;
+}
+
+python::tuple alignPharmacophore(
+    Pharmacophore &ref,
+    Pharmacophore &probe,
+    ROMol *probeMol = nullptr,
+    double epsilon = 0.5,
+    bool useNormals = true,
+    bool useExclusion = false
+) {
+  // Perform alignment
+  auto res = alignit::alignPharmacophores(
+      ref, probe, epsilon, useNormals, useExclusion, probeMol);
+  // Update molecules conformer if given
+  if (probeMol) {
+      const Conformer &conf = res.resMol.getConformer();
+      probeMol->clearConformers();
+      probeMol->addConformer(new Conformer(conf));
+  }
+  // Return is (tanimoto, tversky_ref, tversky_db)
+  return python::make_tuple(res.tanimoto, res.tversky_db, res.tversky_ref);
+}
+
+python::tuple alignMol(
+    ROMol &refMol,
+    ROMol &probeMol,
+    bool calcArom = true,
+    bool calcHDon = true,
+    bool calcHAcc = true,
+    bool calcLipo = true,
+    bool calcCharge = true,
+    bool calcHybrid = true,
+    bool merge = false,
+    double epsilon = 0.5,
+    bool useNormals = true,
+    bool useExclusion = false
+) {
+    // Perform alignment
+    auto out = alignit::alignMols(refMol, probeMol, calcArom, calcHDon,
+        calcHAcc, calcLipo, calcCharge, calcHybrid, merge, epsilon,
+        useNormals, useExclusion);
+    const Result &res = std::get<1>(out);
+    // Update molecules conformer
+    const Conformer &conf = res.resMol.getConformer();
+    probeMol.clearConformers();
+    probeMol.addConformer(new Conformer(conf));
+    // Return is (tanimoto, tversky_ref, tversky_db)
+    return python::make_tuple(res.tanimoto, res.tversky_db, res.tversky_ref);
 }
 
 } // namespace
@@ -83,26 +128,45 @@ void wrap_pyalignit() {
         .def(python::vector_indexing_suite<std::vector<PharmacophorePoint>>());
 
     // CalcPharm (calculate pharmacophores)
-    python::def("CalcPharmacophore", &alignit::calcPharmacophore, (
-            python::arg("mol"),
-            python::arg("calcArom") = true,
-            python::arg("calcHDon") = true,
-            python::arg("calcHAcc") = true,
-            python::arg("calcLipo") = true,
-            python::arg("calcCharge") = true,
-            python::arg("calcHybrid") = true),
-            "calculate a pharmacophore model for a molecule."
-    );
+    python::def("CalcPharmacophore", &alignit::calcPharmacophore,
+                (python::arg("mol"),
+                 python::arg("calcArom") = true,
+                 python::arg("calcHDon") = true,
+                 python::arg("calcHAcc") = true,
+                 python::arg("calcLipo") = true,
+                 python::arg("calcCharge") = true,
+                 python::arg("calcHybrid") = true),
+                "calculate a pharmacophore model for a molecule.");
 
     // PharmMerger (merge neighboring pharmacophores)
     python::def("MergePharmacophore", &alignit::mergePharmacophore,
-            (python::arg("pharmacophore")),
-            "merge neighbouring pharmacophore points of the same category"
-    );
+                (python::arg("pharmacophore")),
+                "merge neighbouring pharmacophore points of the same category");
 
-    // Alignment
+    // Alignment (pharmacophore->pharmacophore)
+    python::def("AlignPharmacophore", &alignPharmacophore,
+                (python::arg("ref"), python::arg("probe"),
+                 python::args("dbMol") = python::ptr((ROMol*)nullptr),
+                 python::args("epsilon") = 0.5,
+                 python::args("useNormals") = true,
+                 python::args("useExclusion") = false),
+                "aligns probe to ref, probe is modified, if the probe "
+                "molecule is also given then this will also be modified");
 
-
+    // Alignment (mol->mol)
+    python::def("AlignMol", &alignMol,
+                (python::arg("ref"), python::arg("probe"),
+                 python::args("calcArom") = true,
+                 python::args("calcHDon") = true,
+                 python::args("calcHAcc") = true,
+                 python::args("calcLipo") = true,
+                 python::args("calcCharge") = true,
+                 python::args("calcHybrid") = true,
+                 python::args("merge") = false,
+                 python::args("epsilon") = 0.5,
+                 python::args("useNormals") = true,
+                 python::args("useExclusion") = false),
+                "aligns probe to ref, probe is modified");
 }
 
 BOOST_PYTHON_MODULE(cpyalignit) { wrap_pyalignit(); }
