@@ -5,7 +5,7 @@ pyalignit.test
 
 """
 from rdkit import Chem
-import pyalignit
+import cpyalignit
 
 import unittest
 
