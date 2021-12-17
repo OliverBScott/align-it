@@ -68,5 +68,8 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 message("Installation directory of executable: ${CMAKE_INSTALL_PREFIX}/bin")
 
 if(BUILD_PYTHON_SUPPORT)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_subdirectory(src/Wrap)
+    message(STATUS "Installing to: ${Python3_SITEARCH}/pyalignit")
+    install(DIRECTORY pyalignit DESTINATION ${Python3_SITEARCH})
 endif(BUILD_PYTHON_SUPPORT)
