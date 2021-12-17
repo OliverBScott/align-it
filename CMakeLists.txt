@@ -70,6 +70,13 @@ message("Installation directory of executable: ${CMAKE_INSTALL_PREFIX}/bin")
 if(BUILD_PYTHON_SUPPORT)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_subdirectory(src/Wrap)
-    message(STATUS "Installing to: ${Python3_SITEARCH}/pyalignit")
-    install(DIRECTORY pyalignit DESTINATION ${Python3_SITEARCH})
+    message("${Python3_EXECUTABLE}")
+    execute_process(
+        COMMAND "${Python3_EXECUTABLE}" -c "if True:
+          from distutils import sysconfig as sc
+          print(sc.get_python_lib(1,0))"
+        OUTPUT_VARIABLE PYTHON_SITE
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+    message(STATUS "Install location ${PYTHON_SITE}/pyalignit")
+    install(DIRECTORY pyalignit DESTINATION ${PYTHON_SITE})
 endif(BUILD_PYTHON_SUPPORT)
