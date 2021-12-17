@@ -10,8 +10,8 @@ IF(NOT CMAKE_BUILD_TYPE)
             FORCE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
-option(BUILD_RDKIT_SUPPORT "Build against the RDKit instead of OpenBabel3" ON)
-option(BUILD_PYTHON_SUPPORT "Build Python wrappers (requires RDKit support)" ON)
+option(BUILD_RDKIT_SUPPORT "Build against the RDKit instead of OpenBabel3" OFF)
+option(BUILD_PYTHON_SUPPORT "Build Python wrappers (requires RDKit support)" OFF)
 
 if(BUILD_PYTHON_SUPPORT AND (NOT BUILD_RDKIT_SUPPORT))
     message(WARNING "Disabling BUILD_PYTHON_SUPPORT because BUILD_RDKIT_SUPPORT is not enabled")
