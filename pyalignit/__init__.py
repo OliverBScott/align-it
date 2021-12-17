@@ -105,9 +105,9 @@ class PharmacophoreWriter(object):
     @staticmethod
     def _point_to_text(p):
         text = p.func.name + '\t'
-        text += f"{p.point.x}\t{p.point.y}\t{p.point.z}\t"
+        text += f"{p.point.x:.6f}\t{p.point.y:.6f}\t{p.point.z:.6f}\t"
         text += f"{p.alpha}\t{int(p.hasNormal)}\t"
-        text += f"{p.normal.x}\t{p.normal.y}\t{p.normal.z}\n"
+        text += f"{p.normal.x:.6f}\t{p.normal.y:.6f}\t{p.normal.z:.6f}\n"
         return text
 
     def write(self, pharmacophore, name=None):
