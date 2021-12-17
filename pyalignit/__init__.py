@@ -99,7 +99,7 @@ class PharmacophoreWriter(object):
         text = f'NAME\t{name}\n'
         for point in pharmacophore:
             text += self._point_to_text(point)
-        text += '$$$$'
+        text += '$$$$\n'
         return text
 
     @staticmethod
@@ -114,6 +114,7 @@ class PharmacophoreWriter(object):
         if self._handle.closed:
             raise IOError('Cannot write to a closed file')
         self._handle.write(self.get_text(pharmacophore, name))
+        self._handle.flush()
         self._num += 1
 
     def flush(self):
