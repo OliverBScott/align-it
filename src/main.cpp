@@ -71,7 +71,7 @@ PharMerger pharMerger;
 int main(int argc, char* argv[]){
 
     // Initialise random number generator
-    srandom(time(NULL));
+    srandom(time(nullptr));
     clock_t t0 = clock();
 
     // Read options
@@ -153,7 +153,7 @@ int main(int argc, char* argv[]){
             calcPharm(&m, &refPharm, uo);
             refId = m.GetTitle();
             delete reader;
-            reader = NULL;
+            reader = nullptr;
 #else
             RDKit::ForwardSDMolSupplier reader(
                     uo.refInpStream, takeOwnership, sanitize, removeHs);
@@ -175,7 +175,7 @@ int main(int argc, char* argv[]){
                 mainErr("Error reading reference pharmacophore");
             }
             delete reader;
-            reader = NULL;
+            reader = nullptr;
         } else {
             mainErr("Unknown format of reference molecule");
         }
@@ -216,11 +216,11 @@ int main(int argc, char* argv[]){
     // local storage of the rotation matrix
     SiMath::Matrix rotMat(3,3,0.0);
     unsigned int molCount(0);
-    PharmacophoreReader* pharmReader = NULL;
+    PharmacophoreReader* pharmReader = nullptr;
 #ifndef USE_RDKIT
-    OpenBabel::OBConversion* molReader = NULL;
+    OpenBabel::OBConversion* molReader = nullptr;
 #else
-    RDKit::ForwardSDMolSupplier* molReader = NULL;
+    RDKit::ForwardSDMolSupplier* molReader = nullptr;
 #endif
     if (uo.dbInpType == "phar") {
         pharmReader = new PharmacophoreReader();
@@ -513,11 +513,11 @@ int main(int argc, char* argv[]){
     }
     if (molReader) {
         delete molReader;
-        molReader = NULL;
+        molReader = nullptr;
     }
     if (pharmReader) {
         delete pharmReader;
-        pharmReader = NULL;
+        pharmReader = nullptr;
     }
 
     //----------------------------------------------------------------------------
