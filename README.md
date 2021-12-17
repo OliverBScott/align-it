@@ -1,10 +1,9 @@
-# align-it
+# Align-it
 
 ## Description
 Code for align-it with openbabel3 and rdkit
 
 ## Install
-- The following example is the basic way to install the tool
 
 ## Tips
 
