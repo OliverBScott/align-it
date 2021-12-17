@@ -81,7 +81,7 @@ Result alignPharmacophores(
     }
 
     // Prepare db
-    const unsigned int dbSize = ref.size();
+    const unsigned int dbSize = db.size();
     double dbVolume = 0.0;
 
     for (unsigned int i(0); i < dbSize; ++i) {
@@ -100,7 +100,6 @@ Result alignPharmacophores(
         res.resMol = *dbMol;
     } else {
         res.resMol.addConformer(new RDKit::Conformer(0));
-
     }
 
     // Alignment

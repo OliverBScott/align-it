@@ -146,7 +146,7 @@ void wrap_pyalignit() {
     // Alignment (pharmacophore->pharmacophore)
     python::def("AlignPharmacophore", &alignPharmacophore,
                 (python::arg("ref"), python::arg("probe"),
-                 python::args("dbMol") = python::ptr((ROMol*)nullptr),
+                 python::args("probeMol") = python::ptr((ROMol*)nullptr),
                  python::args("epsilon") = 0.5,
                  python::args("useNormals") = true,
                  python::args("useExclusion") = false),
