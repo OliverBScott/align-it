@@ -1,6 +1,6 @@
 # Align-it
 
-Code for align-it with openbabel3 and rdkit (+Python wrappers)
+Code for align-it with openbabel3 and rdkit (+Python wrappers), inspired by [pyshapeit](https://github.com/rdkit/shape-it)
 
 ## Install
 
