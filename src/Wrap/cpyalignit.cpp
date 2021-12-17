@@ -60,7 +60,7 @@ python::tuple alignPharmacophore(
       probeMol->addConformer(new Conformer(conf));
   }
   // Return is (tanimoto, tversky_ref, tversky_db)
-  return python::make_tuple(res.tanimoto, res.tversky_db, res.tversky_ref);
+  return python::make_tuple(res.tanimoto, res.tversky_ref, res.tversky_db);
 }
 
 python::tuple alignMol(
@@ -87,7 +87,7 @@ python::tuple alignMol(
     probeMol.clearConformers();
     probeMol.addConformer(new Conformer(conf));
     // Return is (tanimoto, tversky_ref, tversky_db)
-    return python::make_tuple(res.tanimoto, res.tversky_db, res.tversky_ref);
+    return python::make_tuple(res.tanimoto, res.tversky_ref, res.tversky_db);
 }
 
 } // namespace
