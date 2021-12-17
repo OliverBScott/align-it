@@ -1,6 +1,5 @@
 # Align-it
 
-## Description
 Code for align-it with openbabel3 and rdkit (+Python wrappers)
 
 ## Install
