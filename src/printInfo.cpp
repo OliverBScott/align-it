@@ -1,5 +1,5 @@
 /*******************************************************************************
-printInfo.h - Align-it
+printInfo.cpp - Align-it
 
 Copyright 2012-2013 by Silicos-it, a division of Imacosi BVBA
 
