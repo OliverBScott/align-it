@@ -59,7 +59,7 @@ void printHeader() {
     std::cerr << "  GNU Lesser General Public License for more details." << std::endl;
     std::cerr << std::endl;
 #ifndef USE_RDKIT
-    std::cerr << "  Shape-it is linked against OpenBabel version 3." << std::endl;
+    std::cerr << "  Align-it is linked against OpenBabel version 3." << std::endl;
     std::cerr << "  OpenBabel is free software; you can redistribute it and/or modify" << std::endl;
     std::cerr << "  it under the terms of the GNU General Public License as published by" << std::endl;
     std::cerr << "  the Free Software Foundation version 2 of the License." << std::endl;
