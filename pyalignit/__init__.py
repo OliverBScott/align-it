@@ -10,6 +10,7 @@ import warnings
 from .cpyalignit import *
 
 from .draw import PHARM_COLORS, draw_pharmacophore
+from .exclusion import create_exclusion_spheres
 
 # Get version information from cpp
 __version__ = GetVersion()
