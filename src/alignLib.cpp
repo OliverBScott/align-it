@@ -96,11 +96,17 @@ Result alignPharmacophores(
     res.overlapVolume = 0.0;
     res.exclVolume = 0.0;
     res.resPharSize = 0;
+#ifndef USE_RDKIT
+    if (dbMol) {
+        res.resMol = *dbMol;
+    }
+#else
     if (dbMol) {
         res.resMol = *dbMol;
     } else {
         res.resMol.addConformer(new RDKit::Conformer(0));
     }
+#endif
 
     // Alignment
     FunctionMapping funcMap(&ref, &db, epsilon);
