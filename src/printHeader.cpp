@@ -64,7 +64,7 @@ void printHeader() {
     std::cerr << "  it under the terms of the GNU General Public License as published by" << std::endl;
     std::cerr << "  the Free Software Foundation version 2 of the License." << std::endl;
 #else
-    std::cerr << "  Shape-it is linked against the RDKit (https://www.rdkit.org)." << std::endl;
+    std::cerr << "  Align-it is linked against the RDKit (https://www.rdkit.org)." << std::endl;
 #endif
     std::cerr << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
     std::cerr << std::endl;
