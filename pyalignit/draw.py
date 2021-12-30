@@ -32,6 +32,20 @@ PHARM_COLORS = {
 
 
 def draw_pharmacophore(pharmacophore, ax=None):
+    """Draw pharmacophore points using matplotlib.
+    
+    Parameters
+    ----------
+    pharmacophore : Pharmacophore
+        The pharmacophore to plot
+    ax : matplotlib axes object, optional
+        Existing axes on which to plot (must be 3D)
+
+    Returns
+    -------
+    matplotlib axes object
+
+    """
     if not HAS_MATPLOTLIB:
         raise ValueError('Drawing requires matplotlib')
     if ax is None:
@@ -47,9 +61,10 @@ def draw_pharmacophore(pharmacophore, ax=None):
 
 def _draw_pharmacophore_point(p, ax):
     center = [p.point.x, p.point.y, p.point.z]
-    sph = _wireframe_sphere(center, p.alpha)
+    sph = _wireframe_sphere(center, 1.0/p.alpha)
+    alpha = 0.5 if p.func != FuncGroup.EXCL else 0.2
     color = PHARM_COLORS[p.func]
-    ax.plot_wireframe(*sph, color=color, alpha=0.5)
+    ax.plot_wireframe(*sph, color=color, alpha=alpha)
 
 
 def _wireframe_sphere(center, radius, n_meridians=20, n_latitude=None):
