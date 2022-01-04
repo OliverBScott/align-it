@@ -289,7 +289,7 @@ void _lipoGroupAtoms(OpenBabel::OBMol* m, Pharmacophore* pharmacophore) {
 
    // Group atoms with three or more bonds
    for (itS = atomSet.begin(); itS != atomSet.end(); ++itS) {
-      if (((*itS)->GetImplicitHCount() - (*itS)->GetHvyDegree()) > 2) {
+      if ((*itS)->GetHvyDegree() > 2) {
          std::list<OpenBabel::OBAtom*> aList;
          aList.push_back(*itS);
          double lipoSum((*itS)->GetPartialCharge());
@@ -301,7 +301,7 @@ void _lipoGroupAtoms(OpenBabel::OBMol* m, Pharmacophore* pharmacophore) {
          std::vector<OpenBabel::OBBond*>::iterator bi;
          for (OpenBabel::OBBond* b = (*itS)->BeginBond(bi); b; b = (*itS)->NextBond(bi)) {
             OpenBabel::OBAtom* a = b->GetNbrAtom(*itS);
-            if (((a->GetImplicitHCount() - a->GetHvyDegree()) == 1) && (a->GetAtomicNum() != 1)) {
+            if ((a->GetHvyDegree() == 1) && (a->GetAtomicNum() != 1)) {
                double lipo(a->GetPartialCharge());
                lipoSum += lipo;
                aList.push_back(a);
@@ -593,7 +593,7 @@ void _lipoGroupAtoms(RDKit::ROMol *m, Pharmacophore *pharmacophore) {
     }
     // Group atoms with three or more bonds
     for (itS = atomSet.begin(); itS != atomSet.end(); ++itS) {
-        if (((*itS)->getNumImplicitHs() - getHeavyDegree((*itS))) > 2) {
+        if (((*itS)->getTotalDegree() - (*itS)->getTotalNumHs(true)) > 2) {
             std::list<RDKit::Atom *> aList;
             aList.push_back(*itS);
             double lipoSum((*itS)->getProp<double>("_LipoContrib"));
@@ -604,7 +604,7 @@ void _lipoGroupAtoms(RDKit::ROMol *m, Pharmacophore *pharmacophore) {
             for (const auto &nbri: boost::make_iterator_range(
                     (*itS)->getOwningMol().getAtomNeighbors((*itS)))) {
                 const auto a = (*itS)->getOwningMol()[nbri];
-                if (((a->getNumImplicitHs() - getHeavyDegree(a)) == 1) && (a->getAtomicNum() != 1)) {
+                if (((a->getTotalDegree() - a->getTotalNumHs(true)) == 1) && (a->getAtomicNum() != 1)) {
                     double lipo(a->getProp<double>("_LipoContrib"));
                     lipoSum += lipo;
                     aList.push_back(a);
