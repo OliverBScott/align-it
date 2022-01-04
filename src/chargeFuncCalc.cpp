@@ -31,9 +31,6 @@ Align-it can be linked against OpenBabel version 3 or the RDKit.
 #ifndef USE_RDKIT
 #include <openbabel/obiter.h>
 #include <openbabel/atom.h>
-#endif
-
-#ifndef USE_RDKIT
 
 void chargeFuncCalc(OpenBabel::OBMol *m, Pharmacophore *pharmacophore) {
 	// Create for every non-zero formal charge a pharmacophore point
