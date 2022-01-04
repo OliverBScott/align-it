@@ -87,7 +87,7 @@ void _lipoLabelAtoms(OpenBabel::OBMol* m) {
                break;
             }
             _lipoLabelNeighbors(a, 0.25); // category 13
-            if ((a->GetImplicitHCount() - a->GetHvyDegree()) !=0 ) {
+            if ((a->GetImplicitHCount() + a->GetExplicitHydrogenCount()) != 0 ) {
                std::vector<OpenBabel::OBBond*>::iterator bi;
                for (OpenBabel::OBBond* b = a->BeginBond(bi); b; b = a->NextBond(bi)) {
                   OpenBabel::OBAtom* aa = b->GetNbrAtom(a);
@@ -139,9 +139,7 @@ void _lipoLabelAtoms(OpenBabel::OBMol* m) {
                   _lipoLabelNeighbors(a, 0.6); // category 11
                }
             }
-            // we make the assumption that every S with valence > 2 can be found
-            // by counting the number of bonds.
-            if ((a->GetImplicitHCount() - a->GetHvyDegree()) > 2) {
+            if (a->GetTotalValence() > 2) {
                a->SetPartialCharge(0.0); // category 7
                for (OpenBabel::OBBond* b = a->BeginBond(bi); b; b = a->NextBond(bi)) {
                   OpenBabel::OBAtom* aa = b->GetNbrAtom(a);
@@ -398,7 +396,7 @@ void _lipoLabelAtoms(RDKit::ROMol *mol) {
                 atom->setProp("_LipoContrib", 0.0);
                 if (atom->getIsAromatic()) break;
                 _lipoLabelNeighbors(atom, 0.25);
-                if ((atom->getNumImplicitHs() - getHeavyDegree(atom)) != 0) {
+                if ((atom->getTotalNumHs(true)) != 0) {
                     for (const auto &nbri: boost::make_iterator_range(
                             atom->getOwningMol().getAtomNeighbors(atom))) {
                         const auto aa = atom->getOwningMol()[nbri];
@@ -450,9 +448,7 @@ void _lipoLabelAtoms(RDKit::ROMol *mol) {
                         _lipoLabelNeighbors(atom, 0.6);
                     }
                 }
-                // we make the assumption that every S with valence > 2 can be found
-                // by counting the number of bonds.
-                if ((atom->getNumImplicitHs() - getHeavyDegree(atom)) > 2) {
+                if ((atom->getTotalValence()) > 2) {
                     atom->setProp("_LipoContrib", 0.0);
                     for (const auto &nbri: boost::make_iterator_range(
                             atom->getOwningMol().getAtomNeighbors(atom))) {
