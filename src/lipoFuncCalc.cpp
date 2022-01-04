@@ -363,7 +363,6 @@ void _lipoLabelNeighbors(OpenBabel::OBAtom* a, double value) {
 }
 
 #else
-#include <utilities.h>
 
 void lipoFuncCalc(RDKit::ROMol *mol, Pharmacophore *pharmacophore) {
     // Find for each atom the 'topology-dependent term': t

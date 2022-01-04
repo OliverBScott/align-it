@@ -406,16 +406,4 @@ void TransformMolecule(RDKit::ROMol *m, SiMath::Matrix &U, Coordinate &center1, 
     }
 }
 
-unsigned int getHeavyDegree(RDKit::Atom *a) {
-    unsigned int deg(0);
-    for (const auto &nbri: boost::make_iterator_range(
-            a->getOwningMol().getAtomNeighbors(a))) {
-        const auto aa = a->getOwningMol()[nbri];
-        if (aa->getAtomicNum() != 1) {
-            ++deg;
-        }
-    }
-    return deg;
-}
-
 #endif

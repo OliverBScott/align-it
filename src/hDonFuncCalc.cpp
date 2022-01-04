@@ -83,7 +83,6 @@ Coordinate _hDonCalcNormal(OpenBabel::OBAtom* a) {
 }
 
 #else
-#include <utilities.h>
 
 void hDonFuncCalc(RDKit::ROMol *mol, Pharmacophore *pharmacophore) {
     // Create for every hydrogen donor a pharmacophore point
