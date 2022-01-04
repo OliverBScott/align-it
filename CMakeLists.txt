@@ -70,7 +70,6 @@ message("Installation directory of executable: ${CMAKE_INSTALL_PREFIX}/bin")
 if(BUILD_PYTHON_SUPPORT)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_subdirectory(src/Wrap)
-    message("${Python3_EXECUTABLE}")
     execute_process(
         COMMAND "${Python3_EXECUTABLE}" -c "if True:
           from distutils import sysconfig as sc
