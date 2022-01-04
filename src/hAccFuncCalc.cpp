@@ -348,10 +348,10 @@ std::list<RDKit::Atom *> _hAccGetNeighbors(RDKit::Atom *a, const RDKit::Conforme
 
 bool _hAccDelocalized(RDKit::Atom *a) {
     if (a->getAtomicNum() != 7) { return false; }
-    if (a->getIsAromatic() && a->getNumImplicitHs() == 3) { return true; }
+    if (a->getIsAromatic() && a->getTotalDegree() == 3) { return true; }
     for (const auto &nbri: boost::make_iterator_range(a->getOwningMol().getAtomNeighbors(a))) {
         const auto aa = a->getOwningMol()[nbri];
-        if (aa->getIsAromatic() && a->getNumImplicitHs() == 3) {
+        if (aa->getIsAromatic() && a->getTotalDegree() == 3) {
             return true;
         }
         if (aa->getAtomicNum() == 6) {
