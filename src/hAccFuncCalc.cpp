@@ -158,7 +158,7 @@ bool _hAccDelocalized(OpenBabel::OBAtom* a) {
       return false;
    }
    //if (a->IsAromatic() && a->GetImplicitValence() == 3)
-   if (a->IsAromatic() && a->GetImplicitHCount() == 3) {
+   if (a->IsAromatic() && a->GetTotalDegree() == 3) {
       return true;
    }
 
@@ -167,7 +167,7 @@ bool _hAccDelocalized(OpenBabel::OBAtom* a) {
       OpenBabel::OBAtom* aa = b1->GetNbrAtom(a);
 
       //if (aa->IsAromatic() && a->GetImplicitValence() == 3)
-      if (aa->IsAromatic() && a->GetImplicitHCount() == 3) {
+      if (aa->IsAromatic() && a->GetTotalDegree() == 3) {
          return true;
       }
 
