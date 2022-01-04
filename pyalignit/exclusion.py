@@ -83,4 +83,4 @@ def create_exclusion_spheres(
 def _distsq_nxm(X, Y):
     sx = np.sum(X**2, axis=1, keepdims=True)
     sy = np.sum(Y**2, axis=1, keepdims=True)
-    return np.sqrt(-2 * X.dot(Y.T) + sx +sy.T)
+    return np.sqrt(-2 * X.dot(Y.T) + sx + sy.T)
