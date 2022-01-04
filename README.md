@@ -20,7 +20,7 @@ make install
 * You may also need to set RDKIT_INCLUDE_DIR and Boost_INCLUDE_DIR
 
 ## Original code and basic usage
-- [align-it webpage](http://silicos-it.be.s3-website-eu-west-1.amazonaws.com/software/align-it/1.0.4/align-it.html) (CLI)
+- [align-it webpage](http://silicos-it.be.s3-website-eu-west-1.amazonaws.com/software/align-it/1.0.4/align-it.html) (CLI usage)
 - [Python library example](https://github.com/OliverBScott/align-it/tree/master/example)
 
 ## How to cite
