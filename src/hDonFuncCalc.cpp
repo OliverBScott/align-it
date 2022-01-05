@@ -35,7 +35,7 @@ void hDonFuncCalc(OpenBabel::OBMol* mol, Pharmacophore* pharmacophore) {
    std::vector<OpenBabel::OBAtom*>::iterator ai;
    for (OpenBabel::OBAtom* a = mol->BeginAtom(ai); a; a = mol->NextAtom(ai)) {
       if (a->GetAtomicNum() == 7 || a->GetAtomicNum() == 8) {
-         if (a->GetFormalCharge() >= 0 && ((a->GetImplicitHCount() + a->GetExplicitHydrogenCount()) !=0)) {
+         if (a->GetFormalCharge() >= 0 && ((a->GetImplicitHCount() + a->ExplicitHydrogenCount()) !=0)) {
              PharmacophorePoint p;
              p.func = HDON;
              p.point.x = a->x();

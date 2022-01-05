@@ -87,7 +87,7 @@ void _lipoLabelAtoms(OpenBabel::OBMol* m) {
                break;
             }
             _lipoLabelNeighbors(a, 0.25); // category 13
-            if ((a->GetImplicitHCount() + a->GetExplicitHydrogenCount()) != 0 ) {
+            if ((a->GetImplicitHCount() + a->ExplicitHydrogenCount()) != 0 ) {
                std::vector<OpenBabel::OBBond*>::iterator bi;
                for (OpenBabel::OBBond* b = a->BeginBond(bi); b; b = a->NextBond(bi)) {
                   OpenBabel::OBAtom* aa = b->GetNbrAtom(a);
