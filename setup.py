@@ -55,6 +55,7 @@ setup(
     include_package_data=True,
     extras_require={"test": ["pytest"]},
     python_requires=">=3.6",
+    install_requires=["numpy"],
     cmake_args=CMAKE_ARGUMENTS,
     cmake_minimum_required_version="3.14"
 )
