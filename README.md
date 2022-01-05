@@ -25,6 +25,10 @@ make install
 - [align-it webpage](http://silicos-it.be.s3-website-eu-west-1.amazonaws.com/software/align-it/1.0.4/align-it.html) (CLI usage and original code)
 - [Python library example](https://github.com/OliverBScott/align-it/tree/master/example)
 
+## Disclaimer
+This repo represents my attempt at updating align-it and creating Python wrappers, in the hope that it may be useful. It is 
+however likely that bugs and differences with the original code will exist. Any contributions are welcome!   
+
 ## How to cite
 If you use this code in your research, please include the following citation in your publication:
 
