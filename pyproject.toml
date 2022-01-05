@@ -1,0 +1,14 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "cmake>=3.21",
+    "scikit-build>=0.12",
+    "numpy",
+    "ninja",
+]
+
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
