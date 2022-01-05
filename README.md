@@ -20,6 +20,16 @@ make install
 * To use RDKit set BUILD_RDKIT_SUPPORT=ON
 * To build Python wrappers set BUILD_PYTHON_SUPPORT=ON (only available with RDKit)
 * You may also need to set RDKIT_INCLUDE_DIR and Boost_INCLUDE_DIR
+####
+* Install Python wrappers using pip (requires pip 10 or greater) (experimental)
+
+```
+git clone https://github.com/OliverBScott/align-it
+pip install ./align-it
+```
+
+* It is assumed that RDKit is already installed using conda
+
 
 ## Original code and basic usage
 - [align-it webpage](http://silicos-it.be.s3-website-eu-west-1.amazonaws.com/software/align-it/1.0.4/align-it.html) (CLI usage and original code)
