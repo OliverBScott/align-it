@@ -5,14 +5,14 @@ pyalignit.test
 
 """
 from rdkit import Chem
-import cpyalignit
+from . import *
 
 import unittest
 
 
 class TestCase(unittest.TestCase):
 
-    def test_AlignMol(self):
+    def testAlign(self):
         pass
 
 
