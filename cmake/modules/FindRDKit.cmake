@@ -52,6 +52,7 @@ else()
                 FileParsers_static FileParsers
                 NO_DEFAULT_PATH
                 PATHS
+                ${CONDA_LIB_DIR}
                 ${RDKIT_DIR}/lib
                 $ENV{RDKIT_LIB_DIR}
                 $ENV{RDKIT_LIB_PATH}
@@ -156,6 +157,7 @@ else()
                 NAMES RDKitFileParsers
                 NO_DEFAULT_PATH
                 PATHS
+                ${CONDA_LIB_DIR}
                 ${RDKIT_DIR}/lib
                 $ENV{RDKIT_LIB_DIR}
                 $ENV{RDKIT_LIB_PATH}
