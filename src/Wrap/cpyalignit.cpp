@@ -1,6 +1,6 @@
 /*********************************************************************************
 
-Copyright 2021 by OliverBScott and the Shape-it contributors
+Copyright 2021 by OliverBScott and the Align-it contributors
 
 This file is part of Align-it.
 
